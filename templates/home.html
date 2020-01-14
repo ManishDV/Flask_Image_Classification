@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block body %}
+<p>Upload an image and the algorithm will tell you what it is!</p>
+
+<form action="/" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" id="image">
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
