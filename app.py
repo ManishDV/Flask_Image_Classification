@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 
 app = Flask(__name__)
+loaded_model = None
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -47,14 +48,6 @@ def home():
 def predict(filename):
 	preds = ''
 	try:
-		json_file = open('/home/neo/Desktop/Flask_Image_Classification/Static/weights/model.json', 'r')
-		loaded_model_json = json_file.read()
-		json_file.close()
-		loaded_model = model_from_json(loaded_model_json)
-		loaded_model._make_predict_function()
-		# load weights into new model
-		loaded_model.load_weights("/home/neo/Desktop/Flask_Image_Classification/Static/weights/model.h5")
-		print("Loaded model from disk")
 		
 		img = cv2.imread('/home/neo/Desktop/Flask_Image_Classification/data/'+filename)
 		img = cv2.resize(img,(64,64))
@@ -83,5 +76,12 @@ def server_error(error):
     return render_template('error.html')
 
 if __name__ == "__main__":
-
-    app.run('127.0.0.1')
+	json_file = open('/home/neo/Desktop/Flask_Image_Classification/Static/weights/model.json', 'r')
+	loaded_model_json = json_file.read()
+	json_file.close()
+	loaded_model = model_from_json(loaded_model_json)
+	loaded_model._make_predict_function()
+	# load weights into new model
+	loaded_model.load_weights("/home/neo/Desktop/Flask_Image_Classification/Static/weights/model.h5")
+	print("Loaded model from disk")
+	app.run('0.0.0.0',debug=True)
