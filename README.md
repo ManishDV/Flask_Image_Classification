@@ -2,5 +2,6 @@
 First Flask Application
 ## Cat vs Dog Classfier 
 Usage : download and run app.py
-#### requirements==>
-   ### Flask and Python3 
+## Requirements==> 
+   ### 1) Flask 
+   ### 2) Python3 
